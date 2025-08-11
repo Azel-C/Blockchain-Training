@@ -1,66 +1,119 @@
-## Foundry
+# Blockchain Training Projects
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This repository contains Solidity smart contracts and related scripts developed as part of my blockchain development learning journey.  
+The projects are built, tested, and deployed using **Foundry**, following structured lessons and real-world dApp examples.
 
-Foundry consists of:
+---
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## 📂 Projects
 
-## Documentation
+### 1. FundMe.sol
+A decentralized crowdfunding contract that allows users to fund in ETH, with the contract owner able to withdraw the total balance.
 
-https://book.getfoundry.sh/
+**Key Features:**
+- Accepts ETH contributions from multiple funders.
+- Uses Chainlink Price Feeds to enforce a minimum funding amount in USD.
+- Maintains a record of each funder’s contribution.
+- Only the owner (deployer) can withdraw the funds.
+- Integrated with mock price feed (`MockV3Aggregator`) for local testing.
 
-## Usage
+**Technologies & Tools:**
+- Solidity ^0.8.18
+- Foundry (Forge & Cast)
+- Chainlink Price Feeds
+- Sepolia Testnet deployment
+- Keystore-based secure deployments (ERC-2335 format)
 
-### Build
+**Deployment & Verification Example:**
+```bash
+make deploy SEPOLIA_RPC_URL=<url> \
+            KEYSTORE=<keystore-file> \
+            --verify \
+            --etherscan-api-key <api-key>
 
-```shell
-$ forge build
-```
+Tests Included:
 
-### Test
+    Minimum funding amount enforcement.
 
-```shell
-$ forge test
-```
+    Funding and withdrawal logic.
 
-### Format
+    Ownership restrictions.
 
-```shell
-$ forge fmt
-```
+    Mock price feed integration for local testing.
 
-### Gas Snapshots
+2. SimpleStorage.sol
 
-```shell
-$ forge snapshot
-```
+A basic contract for storing and retrieving a single unsigned integer.
 
-### Anvil
+Key Features:
 
-```shell
-$ anvil
-```
+    Store a number on-chain.
 
-### Deploy
+    Retrieve the stored number.
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+    Demonstrates Solidity basics for state variables and functions.
 
-### Cast
+Technologies & Tools:
 
-```shell
-$ cast <subcommand>
-```
+    Solidity ^0.8.18
 
-### Help
+    Foundry for compiling, deploying, and testing.
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+Tests Included:
+
+    Setting a value and retrieving it.
+
+    Default value checks.
+
+🛠 Project Structure
+
+.
+├── src/
+│   ├── FundMe.sol
+│   ├── PriceConverter.sol
+│   ├── SimpleStorage.sol
+├── script/
+│   ├── DeployFundMe.s.sol
+│   ├── DeploySimpleStorage.s.sol
+├── test/
+│   ├── FundMeTest.t.sol
+│   ├── mocks/
+│   │   └── MockV3Aggregator.sol
+│   └── SimpleStorageTest.t.sol
+├── Makefile
+└── README.md
+
+🚀 Getting Started
+Prerequisites
+
+    Foundry
+
+    Node.js (for package management if needed)
+
+    Git
+
+Installation
+
+# Clone the repository
+git clone <repo-url>
+
+# Enter the project directory
+cd blockchain-training
+
+# Install dependencies (if any)
+forge install
+
+Running Tests
+
+forge test -vv
+
+Deployment
+
+make deploy
+
+📚 Learning Source
+
+These projects were built as part of the Cyfrin Updraft Solidity & Foundry training program, with additional practice and experimentation for real-world readiness.
+📜 License
+
+This project is licensed under the MIT License.
